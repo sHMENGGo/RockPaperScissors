@@ -11,65 +11,81 @@
         @import url('https://fonts.googleapis.com/css2?family=Honk&family=Modak&display=swap');        
         
         body {
-            display: grid;
-            place-items: center;
-            
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            background-color: rgb(215, 215, 255);
+            margin: 0;
+        }
+        body::after {
+            background-color: rgb(255, 200, 200);
+            position: absolute;
+            z-index: -1;
+            content: "";
+            inset: 0;
+            left: 50%;
         }
         #rock {
             display: none;
             position: absolute;
-            height: 20vh;
-            width: 42vw;
-            top: 35%;
+            width: 25vw;
+            aspect-ratio: 1;
+            top: 30%;
             transform: scaleX(-1) rotate(270deg);
             left: 10%;
+            mix-blend-mode: darken;
         }
         #erock {
             display: none;
             position: absolute;
-            height: 20vh;
-            width: 42vw;
+            width: 25vw;
+            aspect-ratio: 1;
             transform: rotate(270deg);
-            top: 35%;
+            top: 30%;
             right: 10%;
+            mix-blend-mode: darken;
         }
 
         #paper {
             display: none;
             position: absolute;
-            height: 20vh;
-            width: 42vw;
-            top: 35%;
+            width: 25vw;
+            aspect-ratio: 1;
+            top: 30%;
             transform: scaleX(-1) rotate(270deg);
             left: 10%;
+            mix-blend-mode: darken;
         }
         #epaper {
             display: none;
             position: absolute;
-            height: 20vh;
-            width: 42vw;
+            width: 25vw;
+            aspect-ratio: 1;
             transform: rotate(270deg);
-            top: 35%;
+            top: 30%;
             right: 10%;
+            mix-blend-mode: darken;
         }
 
         #scissor {      
             display: none;      
             position: absolute;
-            height: 18vh;
-            width: 40vw;
-            top: 35%;
+            width: 25vw;
+            aspect-ratio: 1;
+            top: 30%;
             transform: rotate(90deg);
             left: 10%;
+            mix-blend-mode: darken;
         }
         #escissor {   
             display: none;         
             position: absolute;
-            height: 18vh;
-            width: 40vw;
+            width: 25vw;
+            aspect-ratio: 1;
             transform: scaleX(-1) rotate(90deg);
-            top: 35%;
+            top: 30%;
             right: 10%;
+            mix-blend-mode: darken;
         }
 
         .b {
@@ -105,40 +121,62 @@
 
 
         #r {
-            left: 30%;
             top: 65%;
+
         }
         #p {
             top: 75%;
-            left: 30%;
         }
         #s {
-            left: 30%;
             top: 85%;
         }
 
         #you {
             position: absolute;
-            font-size: 30px;
-            left: 12%;
-            top: 10%;
-            font-family: 'Honk';
+            font-size: 3rem;
+            left: 5rem;
+            top: 5%;
+            font-family: 'Honk' , sans-serif;
             margin: 0;
         }
         #comp {
             position: absolute;
-            font-size: 30px;
-            right: 3%;
-            top: 10%;
+            font-size: 3em;
+            right: 2rem;
+            top: 5%;
             margin: 0;
-            font-family: 'Honk';
+            font-family: 'Honk' , sans-serif;
         }
         #result {
             position: absolute;
-            font-size: 50px;
+            font-size: 4em;
             text-align: center;
             top: 8%;
             font-family: 'Modak';
+            font-weight: 500;
+            color: transparent;
+            background: linear-gradient(orange, red);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-stroke: 3px black;
+        }
+        #score {
+            position: absolute;
+            font-size: 4rem;
+            text-align: center;
+            top: 8%;
+            left: 5%;
+            font-family: Arial, Helvetica, sans-serif;
+            color: rgb(255, 56, 56);
+            text-shadow: 3px 3px 1px #000000;
+        }
+        #escore {
+            position: absolute;
+            font-size: 4rem;
+            text-align: center;
+            top: 8%;
+            right: 5%;
+            font-family: Arial, Helvetica, sans-serif;
             color: rgb(255, 56, 56);
             text-shadow: 3px 3px 1px #000000;
         }
@@ -148,6 +186,8 @@
     <p id="you"><b>YOU</b></p>
     <p id="comp"><b>COMPUTER</b></p>
     <p id="result"></p>
+    <p id="score"></p>
+    <p id="escore"></p>
     <img id="scissor" src="https://cdn-icons-png.freepik.com/128/4151/4151780.png" alt="">
     <img id="paper" src="https://cdn-icons-gif.flaticon.com/11321/11321388.gif" alt="">
     <img id="rock" src="https://cdn-icons-gif.flaticon.com/11321/11321458.gif" alt="">
@@ -171,6 +211,10 @@
     let epapelPic = document.querySelector('#epaper');
     let eguntingPic = document.querySelector('#escissor');
     let result = document.querySelector('#result');
+    let score = document.querySelector('#score').innerHTML = 0;
+    let escore = document.querySelector('#escore').innerHTML = 0;
+    let you = document.querySelector('#you');
+    let comp = document.querySelector('#comp');
 
     let computerMove = '';
     let myMove = '';
@@ -185,7 +229,7 @@
             function(){
                 ebatoPic.style.display = "none";
             },
-        3000);
+        2000);
         } 
         else if (randomNum >= 1 / 3 && randomNum < 2 / 3) {
             computerMove = 'paper';
@@ -194,7 +238,7 @@
             function(){
                 epapelPic.style.display = "none";
             },
-        3000);
+        2000);
         } 
         else if (randomNum >= 2 / 3 && randomNum < 1) {
             computerMove = 'scissors';
@@ -203,7 +247,7 @@
             function(){
                 eguntingPic.style.display = "none";
             },
-        3000);
+        2000);
         }
     }
 
@@ -211,31 +255,52 @@
         myMove = 'bato';
         batoPic.style.display = "block";
         result.style.display = "block";
+        r.style.display = "none";
+        p.style.display = "none";
+        s.style.display = "none";
         enemy();
         check();
-        setTimeout(
-            function(){ batoPic.style.display = "none"; result.style.display = "none"; },
-        3000);
+        setTimeout( function(){ 
+            batoPic.style.display = "none"; 
+            result.style.display = "none"; 
+            r.style.display = "block";
+            p.style.display = "block";
+            s.style.display = "block";
+        }, 2000);
     }
     papel.onclick = function(){
         myMove = 'papel';
         papelPic.style.display = "block";
         result.style.display = "block";
+        r.style.display = "none";
+        p.style.display = "none";
+        s.style.display = "none";
         enemy();
         check();
-        setTimeout(
-            function(){ papelPic.style.display = "none"; result.style.display = "none"; },
-        3000);
+        setTimeout( function(){ 
+            papelPic.style.display = "none"; 
+            result.style.display = "none"; 
+            r.style.display = "block";
+            p.style.display = "block";
+            s.style.display = "block";
+        }, 2000);
     }
     gunting.onclick = function(){
         myMove = 'gunting';
         guntingPic.style.display = "block";
         result.style.display = "block";
+        r.style.display = "none";
+        p.style.display = "none";
+        s.style.display = "none";
         enemy();
         check();
-        setTimeout(
-            function(){ guntingPic.style.display = "none"; result.style.display = "none"; },
-        3000);
+        setTimeout( function(){ 
+            guntingPic.style.display = "none"; 
+            result.style.display = "none"; 
+            r.style.display = "block";
+            p.style.display = "block";
+            s.style.display = "block";
+        }, 2000);
     }
 
     function check() {
@@ -250,21 +315,33 @@
         }
         else if(myMove === 'gunting' && computerMove === 'paper'){
             result.innerHTML = "You Win!";
+            score++;
+            document.querySelector('#score').innerHTML = score;
         }
         else if(myMove === 'gunting' && computerMove === 'rock'){
             result.innerHTML = "You Lose!";
+            escore++;
+            document.querySelector('#escore').innerHTML = escore;
         }
         else if(myMove === 'papel' && computerMove === 'scissors'){
             result.innerHTML = "You Lose!";
+            escore++;
+            document.querySelector('#escore').innerHTML = escore;
         }
         else if(myMove === 'papel' && computerMove === 'rock'){
             result.innerHTML = "You Win!";
+            score++;
+            document.querySelector('#score').innerHTML = score;
         }
         else if(myMove === 'bato' && computerMove === 'scissors'){
             result.innerHTML = "You Win!";
+            score++;
+            document.querySelector('#score').innerHTML = score;
         }
         else if(myMove === 'bato' && computerMove === 'paper'){
             result.innerHTML = "You Lose!";
+            escore++;
+            document.querySelector('#escore').innerHTML = escore;
         }
     }
 </script>
